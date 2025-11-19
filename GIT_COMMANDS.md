@@ -27,3 +27,13 @@ git commit -m "Updated game features"
 # 3. Push the updates to GitHub
 git push
 ```
+
+## 3. How to Turn it into a Website (GitHub Pages)
+To make your game playable via a link:
+
+1.  Go to your repository on GitHub.com.
+2.  Click **Settings** (top right tab).
+3.  Click **Pages** (in the left sidebar, under "Code and automation").
+4.  Under **Source**, change "None" to **`main`**.
+5.  Click **Save**.
+6.  Wait 1-2 minutes, then refresh the page. Your link will appear at the top!
