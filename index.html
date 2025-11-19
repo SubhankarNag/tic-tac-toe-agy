@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern, 2-player Tic-Tac-Toe game with a sleek dark mode design and smooth animations.">
+    <title>Modern Tic-Tac-Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Theme Toggle (Absolute within container) -->
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+
+        <!-- Start Screen -->
+        <section id="startScreen" class="screen active">
+            <div class="brand">
+                <div class="logo-icon">
+                    <span class="x">X</span><span class="o">O</span>
+                </div>
+                <h1 class="title">Tic Tac Toe</h1>
+            </div>
+            
+            <div class="mode-selection">
+                <div class="mode-group">
+                    <button class="mode-btn" id="aiModeBtn">
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                        </div>
+                        <div class="btn-text">
+                            <span class="primary-text">1 Player</span>
+                            <span class="sub-text">vs AI Opponent</span>
+                        </div>
+                        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    
+                    <div class="difficulty-wrapper" id="difficultyWrapper">
+                        <div class="difficulty-selector">
+                            <button class="diff-btn" data-diff="easy">Easy</button>
+                            <button class="diff-btn" data-diff="medium">Medium</button>
+                            <button class="diff-btn" data-diff="hard">Hard</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="mode-btn" data-mode="pvp">
+                    <div class="icon-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="btn-text">
+                        <span class="primary-text">2 Players</span>
+                        <span class="sub-text">Local Multiplayer</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Game Screen -->
+        <section id="gameScreen" class="screen hidden">
+            <header class="game-header">
+                <div class="turn-indicator" id="status">
+                    Player <span class="current-player">X</span>'s Turn
+                </div>
+            </header>
+
+            <div class="game-board" id="board">
+                <div class="cell" data-cell-index="0"></div>
+                <div class="cell" data-cell-index="1"></div>
+                <div class="cell" data-cell-index="2"></div>
+                <div class="cell" data-cell-index="3"></div>
+                <div class="cell" data-cell-index="4"></div>
+                <div class="cell" data-cell-index="5"></div>
+                <div class="cell" data-cell-index="6"></div>
+                <div class="cell" data-cell-index="7"></div>
+                <div class="cell" data-cell-index="8"></div>
+            </div>
+
+            <div class="scoreboard">
+                <div class="score-box x-score active">
+                    <span class="player-label">Player X</span>
+                    <span class="score-value" id="scoreX">0</span>
+                </div>
+                <div class="score-box draw-score">
+                    <span class="player-label">Draws</span>
+                    <span class="score-value" id="scoreDraw">0</span>
+                </div>
+                <div class="score-box o-score">
+                    <span class="player-label" id="oPlayerName">Player O</span>
+                    <span class="score-value" id="scoreO">0</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="restartBtn" class="btn icon-btn" aria-label="Restart Round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                </button>
+                <button id="backBtn" class="btn icon-btn secondary" aria-label="Back to Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for Game Over -->
+    <div id="gameOverModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="winnerText"></h2>
+            <div class="modal-actions">
+                <button id="nextRoundBtn" class="btn primary">Play Again</button>
+                <button id="quitBtn" class="btn secondary">Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
