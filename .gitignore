@@ -1,0 +1,12 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore documentation/guide files (local only)
+TECHNICAL_DOCS.md
+PROJECT_GUIDE.md
+FIREBASE_SETUP.md
+FIREBASE_SECURITY.md
+ONLINE_MULTIPLAYER_GUIDE.md
+DEPLOY.md
+publish.bat
